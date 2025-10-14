@@ -1,0 +1,8 @@
+- [ ] Set up the Isaac Lab toolchain (Omniverse Isaac Sim + `omni.isaac.lab`), verify sample RL environments run headless on the target hardware, and snapshot baseline performance for comparison.
+- [ ] Map the existing Isaac Gym task scaffolding in `bidexhands/tasks/hand_base/base_task.py` and `.../vec_task.py` to Isaac Lab's `ManagerBasedEnv` (or equivalent) entry point, including the reset/step lifecycle, randomization hooks, and GPU tensor acquisition.
+- [ ] Rebuild each hand task (e.g., `bidexhands/tasks/shadow_hand_over.py`) on top of Isaac Lab scene-graph APIs: recreate actors, articulations, sensors, and domain randomization using Lab's `World`/`SceneEntityCfg` configs.
+- [ ] Convert all MJCF/URDF assets under `assets/` to USD with correct material bindings, joint limits, and collision meshes, and register them in Isaac Lab's asset registry/config files.
+- [ ] Re-implement point-cloud and camera observation pipelines using Isaac Lab's sensor framework, ensuring tensor shapes stay compatible with downstream networks defined in `bidexhands/algorithms`.
+- [ ] Replace the custom VecTask wrappers (`bidexhands/tasks/hand_base/vec_task*.py`) with Isaac Lab's vectorized environment interfaces (e.g., `VecEnvRLGames`), or adapt the training runners in `bidexhands/train*.py` to consume Lab's step API.
+- [ ] Update algorithm configs in `bidexhands/cfg/` to the Isaac Lab YAML schema (physics params, domain randomization, control frequency), and validate PPO/rl-games integration end-to-end.
+- [ ] Port evaluation, logging, and dataset export utilities (e.g., offline RL collectors) to the new API, then document the migration steps and new run commands in `README.md`.
